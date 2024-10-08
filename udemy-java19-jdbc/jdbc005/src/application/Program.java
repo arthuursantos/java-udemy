@@ -21,10 +21,10 @@ public class Program {
         st.setString(2, "Salto");
         int rows = st.executeUpdate();
 
-        int x=1;
-        if (x<2) {
-            throw new DbException("simulando erro!");
-        }
+//        int x=1;
+//        if (x<2) {
+//            throw new DbException("simulando erro!");
+//        }
 
         int rows2 = st.executeUpdate("UPDATE city SET Population = 53433 WHERE Id = 433");
 

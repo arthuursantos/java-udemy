@@ -3,17 +3,11 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/java-udemy.iml" filepath="$PROJECT_DIR$/.idea/java-udemy.iml" />
-      <module fileurl="file://$PROJECT_DIR$/udemy-java19-jdbc/jdbc-final/jdbc-final.iml" filepath="$PROJECT_DIR$/udemy-java19-jdbc/jdbc-final/jdbc-final.iml" />
       <module fileurl="file://$PROJECT_DIR$/udemy-java19-jdbc/jdbc001/jdbc001.iml" filepath="$PROJECT_DIR$/udemy-java19-jdbc/jdbc001/jdbc001.iml" />
       <module fileurl="file://$PROJECT_DIR$/udemy-java19-jdbc/jdbc002/jdbc002.iml" filepath="$PROJECT_DIR$/udemy-java19-jdbc/jdbc002/jdbc002.iml" />
       <module fileurl="file://$PROJECT_DIR$/udemy-java19-jdbc/jdbc003/jdbc003.iml" filepath="$PROJECT_DIR$/udemy-java19-jdbc/jdbc003/jdbc003.iml" />
       <module fileurl="file://$PROJECT_DIR$/udemy-java19-jdbc/jdbc004/jdbc004.iml" filepath="$PROJECT_DIR$/udemy-java19-jdbc/jdbc004/jdbc004.iml" />
       <module fileurl="file://$PROJECT_DIR$/udemy-java19-jdbc/jdbc005/jdbc005.iml" filepath="$PROJECT_DIR$/udemy-java19-jdbc/jdbc005/jdbc005.iml" />
-      <module fileurl="file://$PROJECT_DIR$/udemy-java13/udemy-java13.iml" filepath="$PROJECT_DIR$/udemy-java13/udemy-java13.iml" />
-      <module fileurl="file://$PROJECT_DIR$/udemy-java15/udemy-java15.iml" filepath="$PROJECT_DIR$/udemy-java15/udemy-java15.iml" />
-      <module fileurl="file://$PROJECT_DIR$/udemy-java16/udemy-java16.iml" filepath="$PROJECT_DIR$/udemy-java16/udemy-java16.iml" />
-      <module fileurl="file://$PROJECT_DIR$/udemy-java17/udemy-java17.iml" filepath="$PROJECT_DIR$/udemy-java17/udemy-java17.iml" />
-      <module fileurl="file://$PROJECT_DIR$/udemy-java18/udemy-java18.iml" filepath="$PROJECT_DIR$/udemy-java18/udemy-java18.iml" />
     </modules>
   </component>
 </project>
