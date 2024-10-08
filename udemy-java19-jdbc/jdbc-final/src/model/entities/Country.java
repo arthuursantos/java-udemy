@@ -26,22 +26,22 @@ public class Country implements Serializable {
     public Country() {
     }
 
-    public Country(String code2, int capital, String headOfState, String governmentForm, String localName, double GNPOld, double GNP, double lifeExpectancy, int population, int indepYear, double surfaceArea, String region, String continent, String name, String code) {
-        Code2 = code2;
-        Capital = capital;
-        HeadOfState = headOfState;
-        GovernmentForm = governmentForm;
-        LocalName = localName;
-        this.GNPOld = GNPOld;
-        this.GNP = GNP;
-        LifeExpectancy = lifeExpectancy;
-        Population = population;
-        IndepYear = indepYear;
-        SurfaceArea = surfaceArea;
-        Region = region;
-        Continent = continent;
-        Name = name;
+    public Country(String code, String name, String continent, String region, double surfaceArea, int indepYear, int population, double lifeExpectancy, double GNP, double GNPOld, String localName, String governmentForm, String headOfState, int capital, String code2) {
         Code = code;
+        Name = name;
+        Continent = continent;
+        Region = region;
+        SurfaceArea = surfaceArea;
+        IndepYear = indepYear;
+        Population = population;
+        LifeExpectancy = lifeExpectancy;
+        this.GNP = GNP;
+        this.GNPOld = GNPOld;
+        LocalName = localName;
+        GovernmentForm = governmentForm;
+        HeadOfState = headOfState;
+        Capital = capital;
+        Code2 = code2;
     }
 
     public String getCode() {

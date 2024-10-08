@@ -1,7 +1,5 @@
 package db;
 
-import src.db.DbException;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.sql.*;
