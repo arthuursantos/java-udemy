@@ -19,5 +19,9 @@ public class Program {
         List<City> cities = cityDao.findByCountry(new Country("BRA", null, null));
         cities.forEach(System.out::println);
 
+        System.out.println("\n[TEST] findAll");
+        cities = cityDao.findAll();
+        cities.forEach(System.out::println);
+
     }
 }

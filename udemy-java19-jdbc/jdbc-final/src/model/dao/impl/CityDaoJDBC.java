@@ -6,10 +6,7 @@ import model.dao.CityDao;
 import model.entities.City;
 import model.entities.Country;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -83,7 +80,32 @@ public class CityDaoJDBC implements CityDao {
 
     @Override
     public List<City> findAll() {
-        return List.of();
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        List<City> cities = new ArrayList<>();
+        Map<String, Country> countries = new HashMap<>();
+        try {
+            st = conn.prepareStatement(
+                    "select city.*, country.Name as CountryName, country.Continent as CountryContinent "
+                    + "from city inner join country on city.CountryCode = country.Code "
+                    + "order by city.Name;"
+            );
+            rs = st.executeQuery();
+            while (rs.next()) {
+                Country country = countries.get(rs.getString("CountryCode"));
+                if (country == null) {
+                    country = instanciateCountry(rs);
+                    countries.put(rs.getString("CountryCode"), country);
+                }
+                cities.add(instanciateCity(rs, country));
+            }
+            return cities;
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        } finally {
+            DB.closeResultSet(rs);
+            DB.closeStatement(st);
+        }
     }
 
     @Override
