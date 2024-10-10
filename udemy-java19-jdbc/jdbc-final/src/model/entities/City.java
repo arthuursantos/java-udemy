@@ -9,16 +9,20 @@ public class City implements Serializable {
 
     private int ID;
     private String Name;
-    private Country CountryCode;
     private String District;
     private int Population;
 
-    public City(int ID, String name, Country countryCode, String district, int population) {
+    private Country Country;
+
+    public City() {
+    }
+
+    public City(int ID, String name, String district, int population, model.entities.Country country) {
         this.ID = ID;
         Name = name;
-        CountryCode = countryCode;
         District = district;
         Population = population;
+        Country = country;
     }
 
     public int getID() {
@@ -37,14 +41,6 @@ public class City implements Serializable {
         Name = name;
     }
 
-    public Country getCountryCode() {
-        return CountryCode;
-    }
-
-    public void setCountryCode(Country countryCode) {
-        CountryCode = countryCode;
-    }
-
     public String getDistrict() {
         return District;
     }
@@ -59,6 +55,14 @@ public class City implements Serializable {
 
     public void setPopulation(int population) {
         Population = population;
+    }
+
+    public model.entities.Country getCountry() {
+        return Country;
+    }
+
+    public void setCountry(model.entities.Country country) {
+        Country = country;
     }
 
     @Override
@@ -79,7 +83,7 @@ public class City implements Serializable {
         return "City{" +
                 "ID=" + ID +
                 ", Name='" + Name + '\'' +
-                ", CountryCode=" + CountryCode +
+                ", Country=" + Country +
                 '}';
     }
 }
