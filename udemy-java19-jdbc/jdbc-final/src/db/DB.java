@@ -35,7 +35,7 @@ public class DB {
     // metodo que finaliza uma conexao sql
 
     public static Properties loadproperties() {
-        try (BufferedReader br = new BufferedReader(new FileReader("C:\\temp\\java-udemy\\udemy-java19-jdbc\\jdbc005\\db.properties"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("db.properties"))) {
             Properties props = new Properties();
             props.load(br);
             return props;

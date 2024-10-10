@@ -10,7 +10,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CityDaoJDBC implements CityDao {
 
@@ -81,6 +84,43 @@ public class CityDaoJDBC implements CityDao {
     @Override
     public List<City> findAll() {
         return List.of();
+    }
+
+    @Override
+    public List<City> findByCountry(Country country) {
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+
+            st = conn.prepareStatement(
+                    "select city.*, country.Name as CountryName, country.Continent as CountryContinent "
+                    + "from city inner join country on city.CountryCode = country.Code "
+                    + "where city.CountryCode = ? "
+                    + "order by city.Name;"
+            );
+            st.setString(1, country.getCode());
+            rs = st.executeQuery();
+
+            List<City> cities = new ArrayList<>();
+            Map<String, Country> countries = new HashMap<>();
+
+            while (rs.next()) {
+                Country mapCountry = countries.get(rs.getString("CountryCode"));
+                if (mapCountry == null) {
+                    mapCountry = instanciateCountry(rs);
+                    countries.put(rs.getString("CountryCode"), mapCountry);
+                }
+                cities.add(instanciateCity(rs, mapCountry));
+            }
+
+            return cities;
+
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        } finally {
+            DB.closeResultSet(rs);
+            DB.closeStatement(st);
+        }
     }
 
 }
