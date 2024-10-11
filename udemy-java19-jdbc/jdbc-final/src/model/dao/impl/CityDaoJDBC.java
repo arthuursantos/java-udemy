@@ -22,7 +22,36 @@ public class CityDaoJDBC implements CityDao {
 
     @Override
     public void insert(City obj) {
+        PreparedStatement ps = null;
+        try {
 
+            ps = conn.prepareStatement(
+                    "insert into city "
+                    + "(Name, CountryCode, District, Population) VALUES "
+                    + "(?,?,?,?)"
+            , Statement.RETURN_GENERATED_KEYS);
+
+            ps.setString(1, obj.getName());
+            ps.setString(2, obj.getCountry().getCode());
+            ps.setString(3, obj.getDistrict());
+            ps.setInt(4, obj.getPopulation());
+            int rows = ps.executeUpdate();
+
+            if (rows > 0) {
+                ResultSet rs = ps.getGeneratedKeys();
+                if (rs.next()) {
+                    int id = rs.getInt(1);
+                    obj.setID(id);
+                }
+                System.out.println("Inserted " + rows + " rows into city");
+                DB.closeResultSet(rs);
+            }
+
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        } finally {
+            DB.closeStatement(ps);
+        }
     }
 
     @Override
