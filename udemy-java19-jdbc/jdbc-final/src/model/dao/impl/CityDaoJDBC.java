@@ -39,11 +39,12 @@ public class CityDaoJDBC implements CityDao {
 
             if (rows > 0) {
                 ResultSet rs = ps.getGeneratedKeys();
+                System.out.println("Inserted " + rows + " rows into city!");
                 if (rs.next()) {
                     int id = rs.getInt(1);
                     obj.setID(id);
+                    System.out.println("Key: " + id);
                 }
-                System.out.println("Inserted " + rows + " rows into city");
                 DB.closeResultSet(rs);
             }
 
@@ -56,12 +57,43 @@ public class CityDaoJDBC implements CityDao {
 
     @Override
     public void update(City obj) {
-
+        PreparedStatement ps = null;
+        try {
+            ps = conn.prepareStatement(
+                    "update city "
+                    +"set Name=?, CountryCode=?, District=?, Population=? "
+                    +"where ID=?"
+            );
+            ps.setString(1, obj.getName());
+            ps.setString(2, obj.getCountry().getCode());
+            ps.setString(3, obj.getDistrict());
+            ps.setInt(4, obj.getPopulation());
+            ps.setInt(5, obj.getID());
+            ps.executeUpdate();
+            System.out.println("Row updated! ID:" + obj.getID());
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        } finally {
+            DB.closeStatement(ps);
+        }
     }
 
     @Override
     public void deleteById(Integer id) {
-
+        PreparedStatement ps = null;
+        try {
+            ps = conn.prepareStatement(
+                    "delete from city "
+                    + " where id = ?"
+            );
+            ps.setInt(1, id);
+            ps.executeUpdate();
+            System.out.println("Row deleted!");
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        } finally {
+            DB.closeStatement(ps);
+        }
     }
 
     @Override
