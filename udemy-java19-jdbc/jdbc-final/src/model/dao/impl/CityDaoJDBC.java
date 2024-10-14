@@ -87,8 +87,12 @@ public class CityDaoJDBC implements CityDao {
                     + " where id = ?"
             );
             ps.setInt(1, id);
-            ps.executeUpdate();
-            System.out.println("Row deleted!");
+            int rows = ps.executeUpdate();
+            if (rows>0) {
+                System.out.println("Row deleted! ID:" + id);
+            } else {
+                throw new DbException("ID doesn't exist!");
+            }
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         } finally {
