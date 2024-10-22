@@ -1,7 +1,9 @@
 package com.javaudemy.project.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.javaudemy.project.entities.enums.OrderStatus;
 import jakarta.persistence.*;
+import org.aspectj.weaver.ast.Or;
 
 import java.io.Serializable;
 import java.time.Instant;
@@ -16,6 +18,8 @@ public class Order implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    private Integer status;
+
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
     private Instant moment;
 
@@ -26,9 +30,20 @@ public class Order implements Serializable {
     public Order() {
     }
 
-    public Order(Instant moment, User client) {
+    public Order(OrderStatus status, Instant moment, User client) {
+        setStatus(status);
         this.moment = moment;
         this.client = client;
+    }
+
+    public OrderStatus getStatus() {
+        return OrderStatus.valueOf(status);
+    }
+
+    public void setStatus(OrderStatus status) {
+        if (status != null) {
+            this.status = status.getCode();
+        }
     }
 
     public int getId() {
