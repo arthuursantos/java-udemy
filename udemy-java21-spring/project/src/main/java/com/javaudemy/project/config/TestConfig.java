@@ -1,9 +1,6 @@
 package com.javaudemy.project.config;
 
-import com.javaudemy.project.entities.Category;
-import com.javaudemy.project.entities.Order;
-import com.javaudemy.project.entities.Product;
-import com.javaudemy.project.entities.User;
+import com.javaudemy.project.entities.*;
 import com.javaudemy.project.entities.enums.OrderStatus;
 import com.javaudemy.project.repositories.CategoryRepository;
 import com.javaudemy.project.repositories.OrderRepository;
@@ -64,6 +61,9 @@ public class TestConfig implements CommandLineRunner {
         p5.getCategories().add(cat2);
         productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
 
+        Payment pay1 = new Payment(Instant.parse("2019-06-20T19:53:07Z"), o1);
+        o1.setPayment(pay1);
+        orderRepository.save(o1);
 
     }
 }
