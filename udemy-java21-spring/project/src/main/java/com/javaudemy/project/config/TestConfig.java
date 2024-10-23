@@ -1,9 +1,13 @@
 package com.javaudemy.project.config;
 
+import com.javaudemy.project.entities.Category;
 import com.javaudemy.project.entities.Order;
+import com.javaudemy.project.entities.Product;
 import com.javaudemy.project.entities.User;
 import com.javaudemy.project.entities.enums.OrderStatus;
+import com.javaudemy.project.repositories.CategoryRepository;
 import com.javaudemy.project.repositories.OrderRepository;
+import com.javaudemy.project.repositories.ProductRepository;
 import com.javaudemy.project.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -23,6 +27,12 @@ public class TestConfig implements CommandLineRunner {
     @Autowired
     private OrderRepository orderRepository;
 
+    @Autowired
+    private CategoryRepository categoryRepository;
+
+    @Autowired
+    private ProductRepository productRepository;
+
     @Override
     public void run(String... args) throws Exception {
 
@@ -34,6 +44,26 @@ public class TestConfig implements CommandLineRunner {
         Order o2 = new Order(OrderStatus.SHIPPED,Instant.parse("2019-07-21T03:42:10Z"), u2);
         Order o3 = new Order(OrderStatus.DELIVERED,Instant.parse("2019-07-22T15:21:22Z"), u1);
         orderRepository.saveAll(Arrays.asList(o1, o2, o3));
+
+        Category cat1 = new Category("Electronics");
+        Category cat2 = new Category("Books");
+        Category cat3 = new Category("Computers");
+        categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
+
+        Product p1 = new Product("The Lord of the Rings", "Lorem ipsum dolor sit amet, consectetur.", 90.5, "");
+        Product p2 = new Product("Smart TV", "Nulla eu imperdiet purus. Maecenas ante.", 2190.0, "");
+        Product p3 = new Product("Macbook Pro", "Nam eleifend maximus tortor, at mollis.", 1250.0, "");
+        Product p4 = new Product("PC Gamer", "Donec aliquet odio ac rhoncus cursus.", 1200.0, "");
+        Product p5 = new Product("Rails for Dummies", "Cras fringilla convallis sem vel faucibus.", 100.99, "");
+
+        p1.getCategories().add(cat2);
+        p2.getCategories().add(cat1);
+        p2.getCategories().add(cat3);
+        p3.getCategories().add(cat3);
+        p4.getCategories().add(cat3);
+        p5.getCategories().add(cat2);
+        productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
+
 
     }
 }
