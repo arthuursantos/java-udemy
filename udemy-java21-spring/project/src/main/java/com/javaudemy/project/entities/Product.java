@@ -17,7 +17,7 @@ public class Product implements Serializable {
     private int id;
     private String name;
     private String description;
-    private double price;
+    private Double price;
     private String imgUrl;
 
     @ManyToMany
@@ -58,7 +58,7 @@ public class Product implements Serializable {
         this.description = description;
     }
 
-    public double getPrice() {
+    public Double getPrice() {
         return price;
     }
 
